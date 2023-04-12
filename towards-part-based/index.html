@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Towards Part-Based Understanding of RGB-D Scans">
+  <meta name="keywords" content="voxel, geometry, reconstruction, shapes, mesh, meshes, prediction, scene, scan, rgbd, rgb-d">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Towards Part-Based Understanding of RGB-D Scans </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/juxtapose.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://www.3dunderstanding.org/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/towards-part-priors/">
+            Towards Part-Based Understanding of RGB-D Scans
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/neural-part-priors/">
+            Neural Part Priors: Learning to Optimize Part-Based Object Completion in RGB-D Scans
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/mesh2tex/">
+            Mesh2Tex: Generating Mesh Textures from Image Queries
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Towards Part-Based Understanding of RGB-D Scans</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.3dunderstanding.org/team.html">Alexey Bokhovkin</a><sup>1,2</sup>
+            </span>
+            <span class="author-block">
+              <a href="http://adase.group/staff/">Vladislav Ishimtsev</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="http://adase.group/staff/">Emil Bogomolov</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a><sup>3,2</sup>
+            </span>
+            <span class="author-block">
+              <a href="http://adase.group/staff/">Alexey Artemov</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="http://adase.group/staff/">Evgeny Burnaev</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://www.3dunderstanding.org/">Angela Dai</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>2</sup>Skolkovo Institute of Science and Technology</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>3</sup>New York University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="static/pdf/towards-part-based.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2012.02094"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/iuixmPNs4v4"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/alexeybokhovkin/part-based-scan-understanding"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <img src="static/images/teaser.png"/>
+        <!-- <video id="teaser" autoplay muted loop height="100%">
+          <source src="static/videos/teaser_1080.mp4"
+                  type="video/mp4">
+        </video> -->
+        <h2 class="subtitle has-text-centered">
+          From an input RGB-D scan (left), we propose to detect objects in the scan and predict their complete part decompositions as <i>semantic part completion</i>; that is, we predict the part masks for the complete object, inferring the part geometry of any missing or unobserved regions in the scan.
+		      To achieve this, we predict the part structure of each detected object to drive a geometric prior-driven prediction of the complete part masks.
+        </h2>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in 3D semantic scene understanding have shown impressive progress in 3D instance segmentation, enabling object-level reasoning about 3D scenes; however, a finer-grained understanding is required to enable interactions with objects and their functional understanding.
+            Thus, we propose the task of part-based scene understanding of real-world 3D environments: from an RGB-D scan of a scene, we detect objects, and for each object predict its decomposition into geometric part masks, which composed together form the complete geometry of the observed object.
+            We leverage an intermediary part graph representation to enable robust completion as well as building of part priors, which we use to construct the final part mask predictions.
+            Our experiments demonstrate that guiding part understanding through part graph to part prior-based predictions significantly outperforms alternative approaches to the task of semantic part completion.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Abstract. -->
+</section>
+
+<section>
+  <!-- Paper video. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-6">
+      <h2 class="title is-2">Video</h2>
+      <div class="publication-video">
+        <iframe src="https://www.youtube.com/embed/iuixmPNs4v4?rel=0&amp;showinfo=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <!--/ Paper video. -->
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Results</h3>
+        <div class="content has-text-justified">
+          <p>
+            We test our approach for semantic part completion on <a href="http://www.scan-net.org/">ScanNet</a> dataset in comparison with state of the art for part decomposition, including scan completion followed by part segmentation. Our approach produces more consistent, accurate part decompositions.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/comparison.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @inproceedings{bokhovkin2021towards,
+        title={Towards Part-Based Understanding of RGB-D Scans},
+        author={Bokhovkin, Alexey and Ishimtsev, Vladislav and Bogomolov, Emil and Zorin, Denis and Artemov, Alexey and Burnaev, Evgeny and Dai, Angela},
+        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+        pages={7484--7494},
+        year={2021}
+      }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="static/pdf/mesh2tex.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website, we just ask that you link back to the <a href="https://nerfies.github.io/">original page</a> in the footer.
+            Please remember to remove the analytics code included in the header of the website which you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
