@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="CAD-Deform: Deformable Fitting of CAD Models to 3D Scans">
+  <meta name="keywords" content="deformation, geometry, reconstruction, shapes, mesh, meshes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> CAD-Deform: Deformable Fitting of CAD Models to 3D Scans </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/juxtapose.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://www.3dunderstanding.org/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/towards-part-priors/">
+            Towards Part-Based Understanding of RGB-D Scans
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/neural-part-priors/">
+            Neural Part Priors: Learning to Optimize Part-Based Object Completion in RGB-D Scans
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/mesh2tex/">
+            Mesh2Tex: Generating Mesh Textures from Image Queries
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/scenefactor/">
+            SceneFactor: Factored Latent 3D Diffusion for Controllable 3D Scene Generation
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">CAD-Deform: Deformable Fitting of CAD Models to 3D Scans</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.3dunderstanding.org/team.html">Alexey Bokhovkin</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="http://shubhtuls.github.io/">Shubham Tulsiani</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://www.3dunderstanding.org/">Angela Dai</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>2</sup>Carnegie Mellon University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="static/pdf/mesh2tex.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2304.05868"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/tY6pPHN5v9Q"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/alexeybokhovkin/mesh2tex"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <img src="static/images/teaser.png"/>
+        <!-- <video id="teaser" autoplay muted loop height="100%">
+          <source src="static/videos/teaser_1080.mp4"
+                  type="video/mp4">
+        </video> -->
+        <h2 class="subtitle has-text-centered">
+          Mesh2Tex learns realistic object texturing on a shape geometry through a hybrid mesh-field texture representation supporting high-resolution texture generation on various shape meshes.
+          Our learned texture manifold supports texture transfer optimization from image queries, producing perceptually consistent texturing in this challenging content creation scenario.
+        </h2>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Remarkable advances have been achieved recently in learning neural representations that characterize object geometry, while generating textured objects suitable for downstream applications and 3D rendering remains at an early stage.
+            In particular, reconstructing textured geometry from images of real objects is a significant challenge - reconstructed geometry is often inexact, making realistic texturing a significant challenge.
+            We present Mesh2Tex, which learns a realistic object texture manifold from uncorrelated collections of 3D object geometry and photorealistic RGB images, by leveraging a hybrid mesh-neural-field texture representation.
+            Our texture representation enables compact encoding of high-resolution textures as a neural field in the barycentric coordinate system of the mesh faces.
+            The learned texture manifold enables effective navigation to generate an object texture for a given 3D object geometry that matches to an input RGB image, which maintains robustness even under challenging real-world scenarios where the mesh geometry approximates an inexact match to the underlying geometry in the RGB image.
+            Mesh2Tex can effectively generate realistic object textures for an object mesh to match real images observations towards digitization of real environments, significantly improving over previous state of the art.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Abstract. -->
+</section>
+
+<section>
+  <!-- Paper video. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-6">
+      <h2 class="title is-2">Video</h2>
+      <div class="publication-video">
+        <iframe src="https://www.youtube.com/embed/tY6pPHN5v9Q?rel=0&amp;showinfo=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <!--/ Paper video. -->
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Unconditional Texture Generation</h3>
+        <div class="content has-text-justified">
+          <p>
+            We test Mesh2Tex for unconditional texturing for meshes from <a href="https://shapenet.org/">ShapeNet</a>, in comparison with state of the art. Our hybrid mesh-field texture representation enables richer texture generation with finer-scale details than state-of-the-art baselines.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/generation_panel.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Texture Generation from Real Image Queries</h3>
+        <div class="content has-text-justified">
+          <p>
+            Mesh2Tex is able to perform texture prediction from real images (<a href="http://www.scan-net.org/">ScanNet</a>) to closely matching shape geometry (<a href="https://shapenet.org/">ShapeNet</a>). Despite inexact geometry and pose, Mesh2Tex produces perceptually consistent texturing.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/opt_real_panel.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Texture Transfer</h3>
+        <div class="content has-text-justified">
+          <p>
+            We also test Mesh2Tex for texture transfer from real images (<a href="http://www.scan-net.org/">ScanNet</a>, <a href="http://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/">CompCars</a>) to arbitrary shape geometry of the same class category (<a href="https://shapenet.org/">ShapeNet</a>). Under this challenging scenario, our NOC-guided patch optimization enables plausible texturing for image queries.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/transfer.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @inproceedings{bokhovkin2023mesh2tex,
+          title     = {Mesh2Tex: Generating Mesh Textures from Image Queries},
+          author    = {Bokhovkin, Alexey and Tulsiani, Shubham and Dai, Angela},
+          journal   = {European Conference on Computer Vision},
+          year      = {2020}
+      }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="static/pdf/mesh2tex.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website, we just ask that you link back to the <a href="https://nerfies.github.io/">original page</a> in the footer.
+            Please remember to remove the analytics code included in the header of the website which you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

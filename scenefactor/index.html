@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SceneFactor: Factored Latent 3D Diffusion for Controllable 3D Scene Generation">
+  <meta name="keywords" content="scenes, geometry, generation, editing, large-scalge, 3D, understanding, diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> SceneFactor: Factored Latent 3D Diffusion for Controllable 3D Scene Generation </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/juxtapose.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://www.3dunderstanding.org/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/towards-part-priors/">
+            Towards Part-Based Understanding of RGB-D Scans
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/neural-part-priors/">
+            Neural Part Priors: Learning to Optimize Part-Based Object Completion in RGB-D Scans
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/mesh2tex/">
+            Mesh2Tex: Generating Mesh Textures from Image Queries
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/scenefactor/">
+            SceneFactor: Factored Latent 3D Diffusion for Controllable 3D Scene Generation
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SceneFactor: Factored Latent 3D Diffusion for Controllable 3D Scene Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.3dunderstanding.org/team.html">Alexey Bokhovkin</a>
+            </span>
+            <span class="author-block">
+              <a href="https://quan-meng.github.io">Quan Meng</a>
+            </span>
+            <span class="author-block">
+              <a href="http://shubhtuls.github.io">Shubham Tulsiani</a>
+            </span>
+            <span class="author-block">
+              <a href="https://www.3dunderstanding.org/">Angela Dai</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>2</sup>Carnegie Mellon University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="static/pdf/scenefactor.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/xxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=wZqX09IFveA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/alexeybokhovkin/neural-part-priors"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <h2 class="title is-2">Scene Generation from Text Input</h2>
+        <!-- <img src="static/images/teaser.jpg"/> -->
+        <video id="teaser" autoplay muted loop height="100%">
+          <source src="static/videos/generation_crop.mp4"
+                  type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          SceneFactor factors the complex task of text-guided 3D scene generation into forming a coarse semantic structure, followed by
+          refined geometric synthesis. Rather than require a learned model to decide the location, type, size, and local geometry of scene elements
+          directly, our generation of a coarse semantic box layout enables training a simpler task of layout-guided geometric synthesis
+        </h2>
+      </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+  <div class="columns is-centered">
+    <div class="column is-6">
+      <h2 class="title is-2">Intuitive Scene Editing</h2>
+      <!-- <img src="static/images/teaser.jpg"/> -->
+      <video id="teaser" autoplay muted loop height="100%">
+        <source src="static/videos/editing_orig.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        SceneFactor enables seamless localized editing through easy manipulation of the 3D semantic box map. We
+        demonstrate the addition of objects (adding boxes), moving objects (moving an existing semantic box), changing object size (scaling an
+        existing semantic box), replacing objects (replacing an existing object box with a new one of a different category), and removing objects
+        (removing an existing semantic box). Note that the rest of the 3D scene remains consistent outside of the editing region
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present SceneFactor, a diffusion-based approach for large-scale 3D scene generation that enables controllable generation and effortless 
+            editing. SceneFactor enables text-guided 3D scene synthesis through our factored diffusion formulation, leveraging latent semantic and 
+            geometric manifolds for generation of arbitrary-sized 3D scenes. 
+            
+            While text input enables easy, controllable generation, text guidance remains imprecise for intuitive, localized editing and manipulation 
+            of the generated 3D scenes. Our factored semantic diffusion generates a proxy semantic space composed of semantic 3D boxes that enables 
+            controllable editing of generated scenes by adding, removing, changing the size of the semantic 3D proxy boxes that guides high-fidelity, 
+            consistent 3D geometric editing. 
+            
+            Extensive experiments demonstrate that our approach enables high-fidelity 3D scene synthesis with effective controllable editing through 
+            our factored diffusion approach.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Abstract. -->
+</section>
+
+<section>
+  <!-- Paper video. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-6">
+      <h2 class="title is-2">Video</h2>
+      <div class="publication-video">
+        <iframe src="https://www.youtube.com/embed/wZqX09IFveA?rel=0&amp;showinfo=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <!--/ Paper video. -->
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Diffusion-based Factored 3D Scene Generation</h3>
+        <div class="content has-text-justified">
+          <p>
+            We formulate text-guided 3D scene generation as a factored diffusion process, first generating a coarse
+            semantic box layout representing the text input (left), followed by synthesis of scene geometry corresponding to the generated semantics
+            (right). This factorization makes complex 3D scene generation more tractable and enables generation of locally editable 3D scenes, which
+            can be manipulated through box manipulations in the semantic maps.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <video id="teaser" autoplay muted loop height="100%">
+                <source src="static/videos/method.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Large-scale Scene Generation from Text Input</h3>
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparisons to state-of-the-art diffusion-based 3D scene generative approaches <a href="https://yang-l1.github.io/blockfusion/">BlockFusion</a>, 
+            and <a href="https://yccyenchicheng.github.io/SDFusion/">SDFusion</a>. Our approach produces improved scene geometry and more cohesive global scene structure 
+            with consistent walls compared to baselines.
+
+            *Note that results for BlockFusion are generated unconditionally.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/scenes_quality.jpg"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h3 class="title is-2">Possible Editing Scenarios</h3>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-addition">
+          <video poster="" id="addition" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/addition.mp4"
+                    type="video/mp4">
+          </video>
+          <p> Addition </p>
+        </div>
+        <div class="item item-size">
+          <video poster="" id="size" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/size.mp4"
+                    type="video/mp4">
+          </video>
+          <p> Size change </p>
+        </div>
+        <div class="item item-replacement">
+          <video poster="" id="replacement" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/replacement.mp4"
+                    type="video/mp4">
+          </video>
+          <p> Replacement </p>
+        </div>
+        <div class="item item-move">
+          <video poster="" id="move" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/move.mp4"
+                    type="video/mp4">
+          </video>
+          <p> Displacement </p>
+        </div>
+        <div class="item item-removal">
+          <video poster="" id="removal" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/removal.mp4"
+                    type="video/mp4">
+          </video>
+          <p> Removal </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Additional Scene Editing Results</h3>
+        <div class="content has-text-justified">
+          <p>
+            Generated scenes and their corresponding semantic maps are shown in the first and third row,
+            and alternatives for each object synthesis-based edit are shown in the second and fourth row.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/editing_additional.jpg"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Scene Chunk Generation from Text Input</h3>
+        <div class="content has-text-justified">
+          <p>
+            Qualitative comparison with state of the art on text-guided scene chunk generation using Qwen1.5 captions. In comparison with
+            <a href="https://alexzhou907.github.io/pvd">PVD</a>, <a href="https://jryanshue.com/nfd/">NFD</a>, 
+            <a href="https://yccyenchicheng.github.io/SDFusion/">SDFusion</a>, and <a href="https://yang-l1.github.io/blockfusion/">BlockFusion</a> 
+            SceneFactor generates higher-fidelity, more coherent scene structures through our factored approach.
+
+            *Note that results for BlockFusion are generated unconditionally
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/chunks_quality.jpg"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h3 class="title is-2">Perceptual Study</h3>
+        <div class="content has-text-justified">
+          <p>
+            Perceptual study of the quality of text-guided 3D indoor scene generation and editing. (a) Unary study on perceptual geometric
+            quality and text consistency for generated chunks and scenes. (b) Unary study on editing quality and scene consistency for SceneFactor.
+            (c) Binary study between SceneFactor and baselines on text consistency between captions and generated chunks. (d) Binary study between
+            SceneFactor and baselines on perceptual geometric quality of generated chunks. (e) Unary study of SceneFactor for locality of edits.
+            
+            *Note that results for BlockFusion are generated unconditionally
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <div class="content">
+              <img src="static/images/user_study.jpg"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @inproceedings{bokhovkin2024scenefactor,
+          title     = {SceneFactor: Factored Latent 3D Diffusion for Controllable 3D Scene Generation},
+          author    = {Bokhovkin, Alexey and Meng, Quan and Tulsiani, Shubham and Dai, Angela},
+          journal   = {arxiv},
+          year      = {2024}
+      }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="static/pdf/scenefactor.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            The website source code borrowed from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
