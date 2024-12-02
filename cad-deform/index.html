@@ -45,6 +45,8 @@
           More Research
         </a>
         <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://alexeybokhovkin.github.io/cad-deform/">
+            CAD-Deform: Deformable Fitting of CAD Models to 3D Scans
           <a class="navbar-item" href="https://alexeybokhovkin.github.io/towards-part-based/">
             Towards Part-Based Understanding of RGB-D Scans
           <a class="navbar-item" href="https://alexeybokhovkin.github.io/neural-part-priors/">
@@ -70,13 +72,25 @@
           <h1 class="title is-1 publication-title">CAD-Deform: Deformable Fitting of CAD Models to 3D Scans</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://www.3dunderstanding.org/team.html">Alexey Bokhovkin</a><sup>1</sup>
+              <a href="https://crei.skoltech.ru/ai/people/vladislavishimtsev">Vladislav Ishimtsev*</a><sup>1</sup>
             </span>
             <span class="author-block">
-              <a href="http://shubhtuls.github.io/">Shubham Tulsiani</a><sup>2</sup>
+              <a href="https://www.3dunderstanding.org/team.html">Alexey Bokhovkin*</a><sup>1</sup>
             </span>
             <span class="author-block">
-              <a href="https://www.3dunderstanding.org/">Angela Dai</a><sup>1</sup>
+              <a href="https://artonson.github.io/">Alexey Artemov</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=aJyxXoMAAAAJ&hl=en">Savva Ignatyev</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://www.niessnerlab.org/">Matthias Niessner</a><sup>1</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://cims.nyu.edu/gcl/denis.html">Denis Zorin</a><sup>2</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://faculty.skoltech.ru/people/evgenyburnaev">Evgeny Burnaev</a><sup>1</sup>
             </span>
           </div>
 
@@ -86,12 +100,15 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>2</sup>Carnegie Mellon University</span>
           </div>
+          <div class="is-size-7 publication-authors">
+            <span class="author-block"><sup>*</sup>denotes equal contribution</span>
+          </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="static/pdf/mesh2tex.pdf"
+                <a href="static/pdf/cad-deform.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -100,7 +117,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2304.05868"
+                <a href="https://arxiv.org/abs/2007.11965"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -109,18 +126,18 @@
                 </a>
               </span>
               <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://youtu.be/tY6pPHN5v9Q"
+              <!-- <span class="link-block">
+                <a href="https://youtu.be/xxx"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
                   </span>
                   <span>Video</span>
                 </a>
-              </span>
+              </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/alexeybokhovkin/mesh2tex"
+                <a href="https://github.com/alexeybokhovkin/CAD-Deform"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -141,13 +158,10 @@
     <div class="columns is-centered">
       <div class="column is-6">
         <img src="static/images/teaser.png"/>
-        <!-- <video id="teaser" autoplay muted loop height="100%">
-          <source src="static/videos/teaser_1080.mp4"
-                  type="video/mp4">
-        </video> -->
         <h2 class="subtitle has-text-centered">
-          Mesh2Tex learns realistic object texturing on a shape geometry through a hybrid mesh-field texture representation supporting high-resolution texture generation on various shape meshes.
-          Our learned texture manifold supports texture transfer optimization from image queries, producing perceptually consistent texturing in this challenging content creation scenario.
+          CAD-Deform takes as input a set of 3D CAD models aligned on a RGB-D scan (left). In order to achieve
+          tight fits (middle), we propose a novel part-based deformation formulation that maintains the desired CAD properties
+          such as sharp features.
         </h2>
       </div>
     </div>
@@ -162,12 +176,15 @@
         <h2 class="title is-2">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Remarkable advances have been achieved recently in learning neural representations that characterize object geometry, while generating textured objects suitable for downstream applications and 3D rendering remains at an early stage.
-            In particular, reconstructing textured geometry from images of real objects is a significant challenge - reconstructed geometry is often inexact, making realistic texturing a significant challenge.
-            We present Mesh2Tex, which learns a realistic object texture manifold from uncorrelated collections of 3D object geometry and photorealistic RGB images, by leveraging a hybrid mesh-neural-field texture representation.
-            Our texture representation enables compact encoding of high-resolution textures as a neural field in the barycentric coordinate system of the mesh faces.
-            The learned texture manifold enables effective navigation to generate an object texture for a given 3D object geometry that matches to an input RGB image, which maintains robustness even under challenging real-world scenarios where the mesh geometry approximates an inexact match to the underlying geometry in the RGB image.
-            Mesh2Tex can effectively generate realistic object textures for an object mesh to match real images observations towards digitization of real environments, significantly improving over previous state of the art.
+            Shape retrieval and alignment are a promising avenue towards turning 3D scans into lightweight CAD representations that can be used for content creation such as mobile or AR/VR gaming scenarios. 
+            Unfortunately, CAD model retrieval is limited by the availability of models in standard 3D shape collections (e.g., ShapeNet). 
+          </p>
+          <p>
+            In this work, we address this shortcoming by introducing CAD-Deform, a method which obtains more accurate CAD-to-scan fits by non-rigidly deforming retrieved CAD models. 
+          </p>
+          <p>
+            Our key contribution is a new non-rigid deformation model incorporating smooth transformations and preservation of sharp features, that simultaneously achieves very tight fits from CAD models to the 3D scan and maintains the clean, high-quality surface properties of hand-modeled CAD objects. 
+            A series of thorough experiments demonstrate that our method achieves significantly tighter scan-to-CAD fits, allowing a more accurate digital replica of the scanned real-world environment while preserving important geometric features present in synthetic CAD environments.
           </p>
         </div>
       </div>
@@ -176,28 +193,18 @@
   <!--/ Abstract. -->
 </section>
 
-<section>
-  <!-- Paper video. -->
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-6">
-      <h2 class="title is-2">Video</h2>
-      <div class="publication-video">
-        <iframe src="https://www.youtube.com/embed/tY6pPHN5v9Q?rel=0&amp;showinfo=0"
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-  <!--/ Paper video. -->
-</section>
-
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
       <div class="column is-two-thirds">
-        <h3 class="title is-2">Unconditional Texture Generation</h3>
+        <h3 class="title is-2">Shape Fitting to 3D Scans</h3>
         <div class="content has-text-justified">
           <p>
-            We test Mesh2Tex for unconditional texturing for meshes from <a href="https://shapenet.org/">ShapeNet</a>, in comparison with state of the art. Our hybrid mesh-field texture representation enables richer texture generation with finer-scale details than state-of-the-art baselines.
+            Deformations obtained using our method and the baselines, with mesh colored according to the Euclidean
+            distance to its nearest point in the scan. We note that high accuracy scores for Harmonic and ARAP deformations are
+            achieved at the cost of destroying the initial structure of the mesh, particularly in regions where scan is missing (note
+            that back side and armrests are gone for chairs in the first and second rows). In contrast, our method is better able to
+            preserve smooth surfaces, sharp features, and overall mesh integrity, while keeping accurate local alignment.
           </p>
         </div>
       </div>
@@ -207,55 +214,7 @@
         <div class="columns is-centered">
           <div class="column is-full-width">
             <div class="content">
-              <img src="static/images/generation_panel.png"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h3 class="title is-2">Texture Generation from Real Image Queries</h3>
-        <div class="content has-text-justified">
-          <p>
-            Mesh2Tex is able to perform texture prediction from real images (<a href="http://www.scan-net.org/">ScanNet</a>) to closely matching shape geometry (<a href="https://shapenet.org/">ShapeNet</a>). Despite inexact geometry and pose, Mesh2Tex produces perceptually consistent texturing.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <div class="content">
-              <img src="static/images/opt_real_panel.png"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-two-thirds">
-        <h3 class="title is-2">Texture Transfer</h3>
-        <div class="content has-text-justified">
-          <p>
-            We also test Mesh2Tex for texture transfer from real images (<a href="http://www.scan-net.org/">ScanNet</a>, <a href="http://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/">CompCars</a>) to arbitrary shape geometry of the same class category (<a href="https://shapenet.org/">ShapeNet</a>). Under this challenging scenario, our NOC-guided patch optimization enables plausible texturing for image queries.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <div class="content">
-              <img src="static/images/transfer.png"/>
+              <img src="static/images/deformation.png"/>
             </div>
           </div>
         </div>
@@ -269,10 +228,10 @@
   <div class="container content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-      @inproceedings{bokhovkin2023mesh2tex,
-          title     = {Mesh2Tex: Generating Mesh Textures from Image Queries},
-          author    = {Bokhovkin, Alexey and Tulsiani, Shubham and Dai, Angela},
-          journal   = {European Conference on Computer Vision},
+      @inproceedings{ishimtsev2020caddeform,
+          title     = {CAD-Deform: Deformable Fitting of CAD Models to 3D Scans},
+          author    = {Ishimtsev, Vladislav and Bokhovkin, Alexey and Artemov, Alexey and Ignatyev, Savva and Niessner, Matthias and Zorin, Denis and Burnaev, Evgeny},
+          journal   = {European Conference on Computer Vision (ECCV)},
           year      = {2020}
       }
     </code></pre>
@@ -283,7 +242,7 @@
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link" href="static/pdf/mesh2tex.pdf">
+      <a class="icon-link" href="static/pdf/cad-deform.pdf">
         <i class="fas fa-file-pdf"></i>
       </a>
       <a class="icon-link" href="#" class="external-link" disabled>
@@ -297,8 +256,7 @@
             This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
           <p>
-            This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website, we just ask that you link back to the <a href="https://nerfies.github.io/">original page</a> in the footer.
-            Please remember to remove the analytics code included in the header of the website which you do not want on your website.
+            The website source code borrowed from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
           </p>
         </div>
       </div>
